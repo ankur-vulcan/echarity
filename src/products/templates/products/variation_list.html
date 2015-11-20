@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<table class='table'>	
+<table class='table'>   
 {% for object in  object_list %}
 <tr>
 <td><a href="/products/{{ object.pk }}/">{{ object.title }}</a></td>
@@ -12,4 +12,5 @@
 <form method="POST" action=""> {% csrf_token %}
 {{ formset.as_p }}
 <input type = "Submit" value="Update" class="btn">
+</form>
 {% endblock %}

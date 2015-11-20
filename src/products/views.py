@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.utils import timezone
 # Custom Imports
-from .forms import VariationInventoryForm
+from .forms import VariationInventoryForm   
 from .models import Product, Variation
 # Create your views here.
 #################################################################################
@@ -53,12 +53,12 @@ class VariationListView(ListView):
     queryset = Variation.objects.all()
 
 
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(VariationListView, self).get_context_data(*args, **kwargs)
-    #     # print context
-    #     context["now"] = timezone.now()
-    #     context["query"] = self.request.GET.get("q")
-    #     return context
+    def get_context_data(self, *args, **kwargs):
+        context = super(VariationListView, self).get_context_data(*args, **kwargs)
+        # print context
+        context["formset"] = VariationInventoryFormSet(queryset=self.get_queryset())
+        # context["query"] = self.request.GET.get("q")
+        return context
 
     def get_queryset(self, *args, **kwargs):
         # qs = super(VariationListView, self).get_queryset(*args, **kwargs)
